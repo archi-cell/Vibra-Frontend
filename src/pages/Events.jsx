@@ -38,7 +38,7 @@ function Explore() {
             setLoadingAI(true);
 
             const response = await fetch(
-                "http://localhost:5000/api/ai/recommend-events",
+                fetch(`${import.meta.env.VITE_API_URL}/api/ai/recommend-events`),
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
