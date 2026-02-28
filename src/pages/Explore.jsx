@@ -7,7 +7,7 @@ function Explore() {
     const navigate = useNavigate();
 
     const fetchEvents = () => {
-        fetch("http://localhost:5000/api/events")
+        fetch(`${import.meta.env.VITE_API_URL}/api/events`)
             .then(res => res.json())
             .then(data => setEvents(data));
     };
