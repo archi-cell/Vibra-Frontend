@@ -61,9 +61,9 @@ function Home() {
                 <h1 className="logo">Vibra</h1>
 
                 <div className="nav-links">
-                    <a href="#services">Services</a>
+                    
                     <a href="/events">Events</a>
-                    <a href="#policies">Policies</a>
+                   
                 </div>
 
                 <div className="nav-actions">
@@ -156,11 +156,7 @@ function Home() {
                 <div className="footer-content">
                     <h3>Vibra</h3>
                     <p>Creating memorable experiences through seamless event management.</p>
-                    <div className="footer-links">
-                        <a href="#">About</a>
-                        <a href="#">Contact</a>
-                        <a href="#">Support</a>
-                    </div>
+                    
                     <p className="copyright">© 2026 Vibra. All rights reserved.</p>
                 </div>
             </footer>
