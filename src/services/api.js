@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:5000/api";
+const API_BASE = "https://vibra-backend-6tpm.onrender.com";
 
 export const registerUser = async (data) => {
     const res = await fetch(`${API_BASE}/auth/register`, {
