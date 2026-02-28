@@ -17,7 +17,7 @@ function Explore() {
     }, []);
 
     const handleDelete = async (id) => {
-        await fetch(`http://localhost:5000/api/events/${id}`, {
+        await fetch(`${import.meta.env.VITE_API_URL}/api/events/${id}`, {
             method: "DELETE"
         });
 
