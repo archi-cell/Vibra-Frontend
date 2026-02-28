@@ -1,0 +1,194 @@
+/* ================== CREATE & EDIT EVENT PAGE ================== */
+.create-page {
+    min-height: 100vh;
+    padding: 110px 70px;
+    background: linear-gradient(180deg, #0A1510, #050C08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #EBF8EF;
+}
+
+/* Page Title */
+.create-page h2 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 60px;
+    color: #6EE7A0;
+    letter-spacing: 1px;
+}
+
+/* ================== FORM CONTAINER ================== */
+.create-page form {
+    width: 100%;
+    max-width: 650px;
+    background: #0A1510;
+    padding: 45px;
+    border-radius: 20px;
+    border: 1px solid #1a3024;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    transition: 0.35s ease;
+}
+
+.create-page form:hover {
+    border-color: #6EE7A0;
+    box-shadow: 0 20px 40px rgba(110, 231, 160, 0.12);
+}
+
+/* ================== INPUT FIELDS ================== */
+.create-page input,
+.create-page textarea {
+    background: #0D1E14;
+    border: 1px solid #1a3024;
+    border-radius: 12px;
+    padding: 15px 18px;
+    font-size: 14px;
+    color: #EBF8EF;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+.create-page input::placeholder,
+.create-page textarea::placeholder {
+    color: #6EE7A0;
+    opacity: 0.55;
+}
+
+.create-page input:focus,
+.create-page textarea:focus {
+    border-color: #6EE7A0;
+    box-shadow: 0 0 12px rgba(110, 231, 160, 0.3);
+}
+
+/* Textarea */
+.create-page textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+/* ================== MAIN BUTTON ================== */
+.create-page button {
+    margin-top: 10px;
+    background: linear-gradient(135deg, #22c55e, #6EE7A0);
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    color: #050C08;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.create-page button:hover {
+    background: linear-gradient(135deg, #34D470, #A8F0C0);
+    transform: translateY(-3px);
+    box-shadow: 0 0 18px rgba(110, 231, 160, 0.45);
+}
+
+/* ================== AI BUTTON ================== */
+.ai-button {
+    background: linear-gradient(135deg, #16a34a, #6EE7A0);
+    color: #050C08;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.ai-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(110, 231, 160, 0.4);
+}
+
+/* ================== AI RECOMMEND SECTION ================== */
+.ai-recommend-section {
+    background: #071009;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    border: 1px solid #1a3024;
+}
+
+.ai-recommend-section input {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #1a3024;
+    background: #0D1E14;
+    color: #EBF8EF;
+}
+
+.ai-recommend-section button {
+    background: linear-gradient(135deg, #22c55e, #6EE7A0);
+    color: #050C08;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.ai-recommend-section button:hover {
+    background: linear-gradient(135deg, #34D470, #A8F0C0);
+}
+
+/* ================== CUSTOM EVENT CARD ================== */
+.custom-event-card {
+    background: #0A1510;
+    padding: 15px;
+    border-radius: 16px;
+    border: 1px solid #1a3024;
+    box-shadow: 0 0 20px rgba(110, 231, 160, 0.06);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.event-description {
+    margin-top: 10px;
+    color: #A8F0C0;
+    font-size: 14px;
+}
+
+/* Details Button */
+.details-btn {
+    margin-top: 5px;
+    background: transparent;
+    border: none;
+    color: #6EE7A0;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.details-btn:hover {
+    color: #A8F0C0;
+    text-decoration: underline;
+}
+
+.book-btn {
+    margin-top: 15px;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #22c55e, #34D470);
+    color: #050C08;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.book-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(52, 212, 112, 0.55);
+}
