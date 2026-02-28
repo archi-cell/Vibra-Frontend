@@ -1,0 +1,26 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* REMOVE DEFAULT BODY MARGIN */
+body {
+  margin: 0;
+  background-color: #050C08; /* Deep forest black */
+  font-family: 'Inter', sans-serif;
+  color: #EBF8EF; /* Soft mint text */
+}
+
+/* FORCE FULL WIDTH */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  background-color: #050C08; /* Ensure full forest background */
+}
+
+/* REMOVE ANY HORIZONTAL SCROLL */
+body {
+  overflow-x: hidden;
+}
