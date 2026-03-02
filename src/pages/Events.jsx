@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import EventCard from "../components/Event";
 
+const API_URL = import.meta.env.VITE_API_URL || "https://vibra-backend-6tpm.onrender.com";
+
 function Explore() {
     const [events, setEvents] = useState([]);
     const [recommendations, setRecommendations] = useState([]);
@@ -13,11 +15,15 @@ function Explore() {
 
     const navigate = useNavigate();
 
-    const fetchEvents = () => {
-        fetch(`${import.meta.env.VITE_API_URL}/api/events`)
-            .then(res => res.json())
-            .then(data => setEvents(data))
-            .catch(err => console.error("Error fetching events:", err));
+    const fetchEvents = async () => {
+        try {
+            const res = await fetch(`${API_URL}/api/events`);
+            if (!res.ok) throw new Error(`Server error: ${res.status}`);
+            const data = await res.json();
+            setEvents(data);
+        } catch (err) {
+            console.error("Error fetching events:", err);
+        }
     };
 
     useEffect(() => {
@@ -38,7 +44,7 @@ function Explore() {
             setLoadingAI(true);
 
             const response = await fetch(
-                `${import.meta.env.VITE_API_URL}/api/ai/recommend-events`,
+                `${API_URL}/api/ai/recommend-events`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -51,13 +57,10 @@ function Explore() {
                 }
             );
 
+            if (!response.ok) throw new Error(`Server error: ${response.status}`);
             const data = await response.json();
+            setRecommendations(data.recommendations);
 
-            if (response.ok) {
-                setRecommendations(data.recommendations);
-            } else {
-                alert("Recommendation failed");
-            }
         } catch (error) {
             console.error("Recommendation error:", error);
             alert("Error fetching recommendations");
@@ -68,9 +71,7 @@ function Explore() {
 
     const renderEvent = (event) => (
         <div key={event._id} className="event-card-wrapper">
-
             <div className="custom-event-card">
-
                 <EventCard
                     event={event}
                     actionButton={{
@@ -78,14 +79,12 @@ function Explore() {
                         onClick: () => handleBooking(event),
                     }}
                 />
-
                 <div className="event-description">
                     <p>
                         {expandedEvent === event._id
                             ? event.description
                             : event.description?.substring(0, 80) + "..."}
                     </p>
-
                     <button
                         className="details-btn"
                         onClick={() =>
@@ -94,12 +93,9 @@ function Explore() {
                             )
                         }
                     >
-                        {expandedEvent === event._id
-                            ? "Hide Details"
-                            : "View Details"}
+                        {expandedEvent === event._id ? "Hide Details" : "View Details"}
                     </button>
                 </div>
-
             </div>
         </div>
     );
@@ -111,21 +107,18 @@ function Explore() {
             {/* 🤖 AI Recommendation Section */}
             <div className="ai-recommend-section">
                 <h3>🤖 Smart Recommendations</h3>
-
                 <input
                     type="text"
                     placeholder="Preferred Location"
                     value={locationPref}
                     onChange={(e) => setLocationPref(e.target.value)}
                 />
-
                 <input
                     type="number"
                     placeholder="Budget"
                     value={budget}
                     onChange={(e) => setBudget(e.target.value)}
                 />
-
                 <button onClick={fetchRecommendations} disabled={loadingAI}>
                     {loadingAI ? "Generating..." : "✨ Get AI Recommendations"}
                 </button>
