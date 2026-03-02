@@ -38,7 +38,7 @@ function Explore() {
             setLoadingAI(true);
 
             const response = await fetch(
-                fetch(`${import.meta.env.VITE_API_URL}/api/ai/recommend-events`),
+                `${import.meta.env.VITE_API_URL}/api/ai/recommend-events`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -67,43 +67,42 @@ function Explore() {
     };
 
     const renderEvent = (event) => (
-    <div key={event._id} className="event-card-wrapper">
+        <div key={event._id} className="event-card-wrapper">
 
-        <div className="custom-event-card">
+            <div className="custom-event-card">
 
-            <EventCard
-                event={event}
-                actionButton={{
-                    label: "Book Now",
-                    onClick: () => handleBooking(event),
-                }}
-            />
+                <EventCard
+                    event={event}
+                    actionButton={{
+                        label: "Book Now",
+                        onClick: () => handleBooking(event),
+                    }}
+                />
 
-            {/* ✅ Description INSIDE card */}
-            <div className="event-description">
-                <p>
-                    {expandedEvent === event._id
-                        ? event.description
-                        : event.description?.substring(0, 80) + "..."}
-                </p>
+                <div className="event-description">
+                    <p>
+                        {expandedEvent === event._id
+                            ? event.description
+                            : event.description?.substring(0, 80) + "..."}
+                    </p>
 
-                <button
-                    className="details-btn"
-                    onClick={() =>
-                        setExpandedEvent(
-                            expandedEvent === event._id ? null : event._id
-                        )
-                    }
-                >
-                    {expandedEvent === event._id
-                        ? "Hide Details"
-                        : "View Details"}
-                </button>
+                    <button
+                        className="details-btn"
+                        onClick={() =>
+                            setExpandedEvent(
+                                expandedEvent === event._id ? null : event._id
+                            )
+                        }
+                    >
+                        {expandedEvent === event._id
+                            ? "Hide Details"
+                            : "View Details"}
+                    </button>
+                </div>
+
             </div>
-
         </div>
-    </div>
-);
+    );
 
     return (
         <div className="explore-page">
