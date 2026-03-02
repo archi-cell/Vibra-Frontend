@@ -63,7 +63,7 @@ function Home() {
                 <div className="nav-links">
                     
                     <a href="/events">Events</a>
-                   
+                    
                 </div>
 
                 <div className="nav-actions">
