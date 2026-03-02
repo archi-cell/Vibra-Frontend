@@ -2,14 +2,21 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import EventCard from "../components/EventCard";
 
+const API_URL = import.meta.env.VITE_API_URL || "https://vibra-backend-6tpm.onrender.com";
+
 function Explore() {
     const [events, setEvents] = useState([]);
     const navigate = useNavigate();
 
-    const fetchEvents = () => {
-        fetch(`${import.meta.env.VITE_API_URL}/api/events`)
-            .then(res => res.json())
-            .then(data => setEvents(data));
+    const fetchEvents = async () => {
+        try {
+            const res = await fetch(`${API_URL}/api/events`);
+            if (!res.ok) throw new Error(`Server error: ${res.status}`);
+            const data = await res.json();
+            setEvents(data);
+        } catch (err) {
+            console.error("Error fetching events:", err);
+        }
     };
 
     useEffect(() => {
@@ -17,11 +24,14 @@ function Explore() {
     }, []);
 
     const handleDelete = async (id) => {
-        await fetch(`${import.meta.env.VITE_API_URL}/api/events/${id}`, {
-            method: "DELETE"
-        });
-
-        fetchEvents(); // refresh list
+        try {
+            await fetch(`${API_URL}/api/events/${id}`, {
+                method: "DELETE"
+            });
+            fetchEvents();
+        } catch (err) {
+            console.error("Error deleting event:", err);
+        }
     };
 
     const handleEdit = (event) => {
@@ -31,7 +41,6 @@ function Explore() {
     return (
         <div className="explore-page">
             <h2>Admin Dashboard</h2>
-
             <div className="event-grid">
                 {events.map(event => (
                     <EventCard
