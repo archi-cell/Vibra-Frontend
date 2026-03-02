@@ -1,3 +1,11 @@
+/* ============================================
+   VIBRA — Global Base CSS (index.css / App.css)
+   Theme: Luxury Midnight — consistent across all Vibra pages
+   Font: Cormorant Garamond (display) + DM Sans (body)
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
 /* RESET */
 * {
   margin: 0;
@@ -8,16 +16,18 @@
 /* REMOVE DEFAULT BODY MARGIN */
 body {
   margin: 0;
-  background-color: #050C08; /* Deep forest black */
-  font-family: 'Inter', sans-serif;
-  color: #EBF8EF; /* Soft mint text */
+  background-color: #0a0b10;
+  font-family: 'DM Sans', sans-serif;
+  color: #f0ede8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* FORCE FULL WIDTH */
 html, body, #root {
   height: 100%;
   width: 100%;
-  background-color: #050C08; /* Ensure full forest background */
+  background-color: #0a0b10;
 }
 
 /* REMOVE ANY HORIZONTAL SCROLL */
