@@ -1,0 +1,332 @@
+/* ============================================
+   VIBRA — Explore Page CSS
+   Theme: Luxury Midnight — consistent with Landing.css & Home.css
+   Font: Cormorant Garamond (display) + DM Sans (body)
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+    --bg: #0a0b10;
+    --bg-card: #0e0f18;
+    --border: rgba(255, 255, 255, 0.07);
+    --border-hover: rgba(201, 169, 110, 0.45);
+    --accent: #c9a96e;
+    --accent-2: #e8c98a;
+    --accent-glow: rgba(201, 169, 110, 0.18);
+    --text: #f0ede8;
+    --muted: rgba(240, 237, 232, 0.5);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ================== EXPLORE PAGE ================== */
+.explore-page {
+    min-height: 100vh;
+    padding: 120px clamp(1.5rem, 8vw, 5rem);
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Atmospheric mesh */
+.explore-page::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 75% 50% at 20% 10%, rgba(201, 169, 110, 0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 65% at 80% 85%, rgba(90, 70, 180, 0.05) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Grain texture */
+.explore-page::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.45;
+}
+
+/* Page Heading */
+.explore-page h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 300;
+    text-align: center;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp 0.9s 0.1s var(--ease-out) both;
+}
+
+/* Gold rule under heading */
+.explore-page h2::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 1px;
+    background: var(--accent);
+    margin: 1rem auto 4rem;
+    opacity: 0.8;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ================== EVENT GRID ================== */
+.event-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.75rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp 0.9s 0.3s var(--ease-out) both;
+}
+
+/* ================== EVENT CARD ================== */
+.event-card {
+    background: var(--bg-card);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform 0.4s var(--ease-out), border-color 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Gold top-bar on hover */
+.event-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 2;
+}
+
+.event-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--border-hover);
+    box-shadow:
+        0 20px 48px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(201, 169, 110, 0.1);
+}
+
+.event-card:hover::before {
+    opacity: 1;
+}
+
+/* Event Image */
+.event-card img,
+.event-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    border-radius: 0;
+    filter: brightness(0.88) saturate(0.9);
+    transition: filter 0.4s ease, transform 0.5s var(--ease-out);
+}
+
+.event-card:hover .event-card img,
+.event-card:hover .event-image,
+.event-card:hover img {
+    filter: brightness(0.95) saturate(1.05);
+    transform: scale(1.03);
+}
+
+/* Event Info */
+.event-info {
+    padding: 1.75rem 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.event-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.75rem;
+    color: var(--text);
+    line-height: 1.25;
+}
+
+.event-info p,
+.event-description {
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 300;
+    margin-bottom: 0.35rem;
+    line-height: 1.7;
+}
+
+.event-info h4 {
+    margin-top: 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--accent);
+    letter-spacing: 0.03em;
+}
+
+/* ================== ACTION BUTTONS ================== */
+.event-actions,
+.card-actions {
+    margin-top: auto;
+    display: flex;
+    gap: 0.75rem;
+    padding-top: 1.25rem;
+    justify-content: space-between;
+}
+
+.event-actions button {
+    flex: 1;
+    padding: 0.6rem;
+    border: none;
+    border-radius: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.3s var(--ease-out), box-shadow 0.3s ease;
+}
+
+/* Edit Button */
+.edit-btn,
+.event-actions button:first-child {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    color: #0a0b10;
+    border: none;
+    padding: 0.55rem 1rem;
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    box-shadow: 0 2px 14px rgba(201, 169, 110, 0.18);
+    transition: transform 0.3s var(--ease-out), box-shadow 0.3s ease;
+}
+
+.edit-btn:hover,
+.event-actions button:first-child:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(201, 169, 110, 0.35);
+}
+
+/* Delete Button */
+.delete-btn,
+.event-actions button:last-child {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.55rem 1rem;
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease, transform 0.3s var(--ease-out);
+}
+
+.delete-btn:hover,
+.event-actions button:last-child:hover {
+    color: #ff6b6b;
+    border-color: rgba(255, 107, 107, 0.35);
+    background: rgba(255, 107, 107, 0.06);
+    transform: translateY(-2px);
+}
+
+/* Details Button */
+.details-btn {
+    background: none;
+    border: none;
+    color: var(--accent);
+    cursor: pointer;
+    padding: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.details-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent-2);
+    transition: width 0.35s var(--ease-out);
+}
+
+.details-btn:hover {
+    color: var(--accent-2);
+}
+
+.details-btn:hover::after {
+    width: 100%;
+}
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 768px) {
+    .explore-page {
+        padding: 100px 1.25rem;
+    }
+
+    .explore-page h2 {
+        font-size: 2.2rem;
+    }
+
+    .event-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .event-actions,
+    .card-actions {
+        flex-direction: column;
+    }
+
+    .edit-btn,
+    .delete-btn,
+    .event-actions button {
+        width: 100%;
+        text-align: center;
+    }
+}

@@ -1,0 +1,454 @@
+/* ============================================
+   VIBRA — Create & Edit Event Page CSS
+   Theme: Luxury Midnight — consistent with Landing.css, Home.css & Explore.css
+   Font: Cormorant Garamond (display) + DM Sans (body)
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+    --bg: #0a0b10;
+    --bg-card: #0e0f18;
+    --bg-input: #0c0d15;
+    --border: rgba(255, 255, 255, 0.07);
+    --border-hover: rgba(201, 169, 110, 0.45);
+    --accent: #c9a96e;
+    --accent-2: #e8c98a;
+    --accent-glow: rgba(201, 169, 110, 0.18);
+    --text: #f0ede8;
+    --muted: rgba(240, 237, 232, 0.5);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ================== CREATE & EDIT EVENT PAGE ================== */
+.create-page {
+    min-height: 100vh;
+    padding: 110px clamp(1.5rem, 8vw, 5rem);
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Atmospheric mesh */
+.create-page::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 75% 50% at 20% 10%, rgba(201, 169, 110, 0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 65% at 80% 85%, rgba(90, 70, 180, 0.05) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Grain texture */
+.create-page::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.45;
+}
+
+/* Page Title */
+.create-page h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 5vw, 3.4rem);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp 0.9s 0.1s var(--ease-out) both;
+}
+
+/* Gold rule under title */
+.create-page h2::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 1px;
+    background: var(--accent);
+    margin: 1rem auto 3.5rem;
+    opacity: 0.8;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ================== FORM CONTAINER ================== */
+.create-page form {
+    width: 100%;
+    max-width: 650px;
+    background: var(--bg-card);
+    padding: clamp(2rem, 5vw, 3rem);
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    position: relative;
+    z-index: 1;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    animation: fadeUp 0.9s 0.25s var(--ease-out) both;
+}
+
+/* Gold top-bar accent */
+.create-page form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    border-radius: 4px 4px 0 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.create-page form:hover {
+    border-color: var(--border-hover);
+    box-shadow:
+        0 20px 48px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(201, 169, 110, 0.08);
+}
+
+.create-page form:hover::before {
+    opacity: 1;
+}
+
+/* ================== INPUT FIELDS ================== */
+.create-page input,
+.create-page textarea {
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 0.85rem 1.1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    width: 100%;
+}
+
+.create-page input::placeholder,
+.create-page textarea::placeholder {
+    color: var(--muted);
+    opacity: 0.7;
+    font-weight: 300;
+}
+
+.create-page input:focus,
+.create-page textarea:focus {
+    border-color: rgba(201, 169, 110, 0.5);
+    box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.08);
+    background: rgba(201, 169, 110, 0.02);
+}
+
+/* Textarea */
+.create-page textarea {
+    min-height: 130px;
+    resize: vertical;
+    line-height: 1.7;
+}
+
+/* ================== MAIN BUTTON ================== */
+.create-page button {
+    margin-top: 0.5rem;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    border: none;
+    padding: 0.9rem;
+    border-radius: 2px;
+    color: #0a0b10;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s var(--ease-out), box-shadow 0.3s ease;
+    box-shadow: 0 4px 20px rgba(201, 169, 110, 0.2);
+}
+
+.create-page button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--accent-2) 0%, var(--accent) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.create-page button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(201, 169, 110, 0.35);
+}
+
+.create-page button:hover::before {
+    opacity: 1;
+}
+
+.create-page button:active {
+    transform: translateY(0);
+}
+
+/* ================== AI BUTTON ================== */
+.ai-button {
+    background: transparent;
+    border: 1px solid rgba(201, 169, 110, 0.35);
+    color: var(--accent);
+    padding: 0.6rem 1.2rem;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.ai-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: translateY(101%);
+    transition: transform 0.35s var(--ease-out);
+    z-index: 0;
+}
+
+.ai-button span {
+    position: relative;
+    z-index: 1;
+}
+
+.ai-button:hover {
+    color: #0a0b10;
+    border-color: var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.ai-button:hover::before {
+    transform: translateY(0);
+}
+
+/* ================== AI RECOMMEND SECTION ================== */
+.ai-recommend-section {
+    background: rgba(7, 8, 14, 0.7);
+    padding: 1.5rem;
+    border-radius: 4px;
+    margin-bottom: 1.75rem;
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    border: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+    transition: border-color 0.4s ease;
+}
+
+.ai-recommend-section:hover {
+    border-color: rgba(201, 169, 110, 0.2);
+}
+
+.ai-recommend-section input {
+    padding: 0.6rem 0.9rem;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+    background: var(--bg-input);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 300;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    flex: 1;
+    min-width: 160px;
+}
+
+.ai-recommend-section input::placeholder {
+    color: var(--muted);
+    opacity: 0.7;
+}
+
+.ai-recommend-section input:focus {
+    border-color: rgba(201, 169, 110, 0.5);
+    box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.08);
+}
+
+.ai-recommend-section button {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    color: #0a0b10;
+    border: none;
+    padding: 0.6rem 1.25rem;
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: transform 0.3s var(--ease-out), box-shadow 0.3s ease;
+    box-shadow: 0 2px 14px rgba(201, 169, 110, 0.18);
+    margin-top: 0;
+}
+
+.ai-recommend-section button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(201, 169, 110, 0.32);
+}
+
+/* ================== CUSTOM EVENT CARD ================== */
+.custom-event-card {
+    background: var(--bg-card);
+    padding: 1.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s var(--ease-out), border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.custom-event-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.custom-event-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--border-hover);
+    box-shadow:
+        0 20px 48px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(201, 169, 110, 0.1);
+}
+
+.custom-event-card:hover::before {
+    opacity: 1;
+}
+
+/* Event Description */
+.event-description {
+    margin-top: 0.6rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 300;
+    line-height: 1.7;
+}
+
+/* Details Button */
+.details-btn {
+    margin-top: 0.35rem;
+    background: transparent;
+    border: none;
+    color: var(--accent);
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.details-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent-2);
+    transition: width 0.35s var(--ease-out);
+}
+
+.details-btn:hover {
+    color: var(--accent-2);
+}
+
+.details-btn:hover::after {
+    width: 100%;
+}
+
+/* Book Button */
+.book-btn {
+    margin-top: 1.1rem;
+    padding: 0.8rem;
+    width: 100%;
+    border: none;
+    border-radius: 2px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    color: #0a0b10;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s var(--ease-out), box-shadow 0.3s ease;
+    box-shadow: 0 4px 20px rgba(201, 169, 110, 0.2);
+}
+
+.book-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--accent-2) 0%, var(--accent) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.book-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(201, 169, 110, 0.35);
+}
+
+.book-btn:hover::before {
+    opacity: 1;
+}
+
+.book-btn:active {
+    transform: translateY(0);
+}

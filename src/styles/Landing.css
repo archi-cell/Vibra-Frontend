@@ -1,0 +1,436 @@
+/* ============================================
+   VIBRA — Landing Page CSS
+   Theme: Luxury Event Platform — Deep Midnight
+   Font: Cormorant Garamond (display) + DM Sans (body)
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+/* ── CSS Variables ── */
+:root {
+    --bg: #0a0b10;
+    --bg-card: #10111a;
+    --surface: #14151f;
+    --border: rgba(255, 255, 255, 0.07);
+    --accent: #c9a96e;
+    /* warm gold */
+    --accent-2: #e8c98a;
+    /* lighter gold */
+    --accent-glow: rgba(201, 169, 110, 0.18);
+    --text: #f0ede8;
+    --muted: rgba(240, 237, 232, 0.5);
+    --nav-h: 72px;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Reset / Base ── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ── Wrapper ── */
+.landing-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Atmospheric background mesh */
+.landing-wrapper::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(201, 169, 110, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 80%, rgba(100, 80, 200, 0.06) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 50% at 50% 50%, rgba(20, 21, 31, 0.6) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Grain texture overlay */
+.landing-wrapper::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+}
+
+/* ── Navbar ── */
+.landing-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+    background: rgba(10, 11, 16, 0.7);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+
+    /* AOS: fade-down on load */
+    animation: navFadeDown 0.8s var(--ease-out) both;
+}
+
+@keyframes navFadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-transform: uppercase;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.logo::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    transform: scaleX(0.4);
+    transform-origin: left;
+    transition: transform 0.4s var(--ease-out);
+}
+
+.logo:hover {
+    color: var(--accent-2);
+}
+
+.logo:hover::after {
+    transform: scaleX(1);
+}
+
+/* Nav Login Button */
+.nav-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 0.5rem 1.4rem;
+    border: 1px solid rgba(201, 169, 110, 0.35);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.nav-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: translateY(101%);
+    transition: transform 0.35s var(--ease-out);
+    z-index: -1;
+}
+
+.nav-btn:hover {
+    color: #0a0b10;
+    border-color: var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.nav-btn:hover::before {
+    transform: translateY(0);
+}
+
+/* ── Hero Section ── */
+.landing-hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: calc(var(--nav-h) + 4rem) clamp(1.5rem, 8vw, 6rem) 6rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Decorative orb behind headline */
+.landing-hero::before {
+    content: '';
+    position: absolute;
+    width: min(600px, 90vw);
+    height: min(600px, 90vw);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201, 169, 110, 0.06) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.landing-hero h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    max-width: 14ch;
+    margin-bottom: 1.5rem;
+
+    animation: heroFadeUp 1s 0.3s var(--ease-out) both;
+}
+
+/* Gold accent on middle word */
+.landing-hero h2 em,
+.landing-hero h2 span {
+    font-style: italic;
+    color: var(--accent);
+}
+
+.landing-hero p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 46ch;
+    line-height: 1.75;
+    margin-bottom: 3rem;
+    letter-spacing: 0.01em;
+
+    animation: heroFadeUp 1s 0.5s var(--ease-out) both;
+}
+
+@keyframes heroFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Decorative line divider ── */
+.landing-hero::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+}
+
+/* ── Hero Buttons ── */
+.hero-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    animation: heroFadeUp 1s 0.7s var(--ease-out) both;
+}
+
+/* Primary CTA */
+.primary-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #0a0b10;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    padding: 0.9rem 2.5rem;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s var(--ease-out), box-shadow 0.3s ease;
+    box-shadow: 0 4px 24px rgba(201, 169, 110, 0.2);
+}
+
+.primary-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--accent-2) 0%, var(--accent) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 36px rgba(201, 169, 110, 0.35);
+}
+
+.primary-btn:hover::before {
+    opacity: 1;
+}
+
+.primary-btn span,
+.primary-btn {
+    position: relative;
+    z-index: 1;
+}
+
+.primary-btn:active {
+    transform: translateY(0);
+}
+
+/* Secondary CTA */
+.secondary-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0.9rem 2.5rem;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+    background: transparent;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s ease, border-color 0.3s ease, transform 0.3s var(--ease-out), box-shadow 0.3s ease;
+}
+
+.secondary-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.04);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.secondary-btn:hover {
+    color: var(--text);
+    border-color: rgba(201, 169, 110, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.secondary-btn:hover::before {
+    opacity: 1;
+}
+
+.secondary-btn:active {
+    transform: translateY(0);
+}
+
+/* ── Footer ── */
+.landing-footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 1.75rem 2rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(240, 237, 232, 0.22);
+    border-top: 1px solid var(--border);
+    background: rgba(10, 11, 16, 0.5);
+    animation: footerFade 1s 1s var(--ease-out) both;
+}
+
+@keyframes footerFade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* ── AOS-style Scroll Animations ── */
+/* If you're using the AOS library, add data-aos="fade-up" to elements.
+   These classes handle it natively as a CSS fallback. */
+
+[data-aos="fade-up"] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+
+[data-aos="fade-up"].aos-animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+[data-aos="fade-down"] {
+    opacity: 0;
+    transform: translateY(-30px);
+    transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+
+[data-aos="fade-down"].aos-animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+    .landing-navbar {
+        padding: 0 1.25rem;
+    }
+
+    .landing-hero h2 {
+        font-size: clamp(2.8rem, 13vw, 4rem);
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
